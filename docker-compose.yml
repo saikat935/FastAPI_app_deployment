@@ -1,0 +1,12 @@
+services:
+  fastapi:
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    container_name: fastapi-app
+
+    ports:
+      - "8000:8000"
+
+    restart: unless-stopped
