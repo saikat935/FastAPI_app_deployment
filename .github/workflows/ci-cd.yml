@@ -38,25 +38,21 @@ jobs:
         run: |
           docker build -t fastapi-app:test .
 
+
   # ==========================
   # CD - Continuous Deployment
   # ==========================
   CD:
-  name: Deploy to Azure VM
-  needs: CI
-  runs-on: ubuntu-latest
+    name: Deploy to Azure VM
+    needs: CI
+    runs-on: self-hosted
 
-  steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v4
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
-    - name: Deploy Via SSH
-      uses: appleboy/ssh-action@v1.2.2
-      with:
-        host: ${{ secrets.SSH_HOST }}
-        username: ${{ secrets.SSH_USERNAME }}
-        key: ${{ secrets.SSH_KEY }}
-        script: |
+      - name: Deploy FastAPI Application
+        run: |
           cd /opt/fastapi-app
 
           git pull origin main
