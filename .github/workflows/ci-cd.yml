@@ -53,10 +53,5 @@ jobs:
 
       - name: Deploy FastAPI Application
         run: |
-          cd /opt/fastapi-app
-
-          git pull origin main
-
-          docker compose up -d --build --remove-orphans
-
-          docker compose ps
+          docker compose -p fastapi-app up -d --build --remove-orphans
+          docker compose -p fastapi-app ps
